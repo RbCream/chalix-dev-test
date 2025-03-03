@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
-import axios from 'axios';
+import api from '../config/api';
 import '../styles/BoardPage.css';
+import Footer from '../components/Footer';
 
 function BoardPage() {
   const [posts, setPosts] = useState([]);
@@ -14,7 +15,6 @@ function BoardPage() {
   useEffect(() => {
     // 페이지 로드 애니메이션
     gsap.from(pageRef.current, {
-      opacity: 0,
       y: 30,
       duration: 0.8,
       ease: "power2.out"
@@ -29,7 +29,6 @@ function BoardPage() {
       // 테이블 행 애니메이션
       const rows = tableRef.current.querySelectorAll('tbody tr');
       gsap.from(rows, {
-        opacity: 0,
         y: 20,
         stagger: 0.1,
         duration: 0.5,
@@ -40,8 +39,8 @@ function BoardPage() {
   
   const fetchPosts = async () => {
     try {
-      const response = await axios.get('/api/posts');
-      setPosts(response.data);
+      const response = await api.get('/board/presentation');
+      setPosts(response.data.slice(0, 8)); // 글 목록 8개만 표시
       setLoading(false);
     } catch (err) {
       console.error('Error fetching posts:', err);
@@ -53,8 +52,16 @@ function BoardPage() {
   return (
     <div ref={pageRef} className="board-page">
       <div className="board-header">
-        <h1>발표논문</h1>
-        <p>챌릭스의 연구 성과를 확인하세요.</p>
+        <div className="header-container">
+          <div className="header-left-logowrap">
+            <img src="/assets/logo.png" alt="Logo" className="header-logo-img" />
+          </div>
+          <div className="header-right-navwrap">
+            <div className="header-nav-item"><a href="/">Home</a></div>
+            <div className="header-nav-item"><a href="/about">About</a></div>
+            <div className="header-nav-item contact"><a href="/contact">Contact</a></div>
+          </div>
+        </div>
       </div>
       
       {loading ? (
@@ -62,55 +69,38 @@ function BoardPage() {
       ) : error ? (
         <div className="error">{error}</div>
       ) : (
-        <>
-          <div className="board-controls">
-            <div className="search-box">
-              <input type="text" placeholder="검색어를 입력하세요" />
-              <button>검색</button>
-            </div>
-            <button className="new-post-btn">글 작성</button>
-          </div>
-          
-          <table ref={tableRef} className="board-table">
-            <thead>
-              <tr>
-                <th>번호</th>
-                <th>제목</th>
-                <th>작성자</th>
-                <th>작성일</th>
-                <th>조회수</th>
+        <table ref={tableRef} className="board-table">
+          <thead>
+            <tr>
+              <th>번호</th>
+              <th>학술대회명</th>
+              <th>논문명</th>
+              <th>날짜</th>
+              <th>비고</th>
+            </tr>
+          </thead>
+          <tbody>
+            {posts.map(post => (
+              <tr key={post.id} className="post-row">
+                <td>{post.id}</td>
+                <td className="post-title">{post.conference_name}</td>
+                <td>{post.paper_title}</td>
+                <td>{new Date(post.date).toLocaleDateString()}</td>
+                <td>{post.note}</td>
               </tr>
-            </thead>
-            <tbody>
-              {posts.map(post => (
-                <tr key={post.id} className="post-row">
-                  <td>{post.id}</td>
-                  <td className="post-title">{post.title}</td>
-                  <td>{post.author}</td>
-                  <td>{new Date(post.created_at).toLocaleDateString()}</td>
-                  <td>{post.view_count}</td>
-                </tr>
-              ))}
-              
-              {posts.length === 0 && (
-                <tr>
-                  <td colSpan="5" className="no-posts">
-                    게시글이 없습니다.
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-          
-          <div className="pagination">
-            <button className="page-btn">&lt;</button>
-            <button className="page-btn active">1</button>
-            <button className="page-btn">2</button>
-            <button className="page-btn">3</button>
-            <button className="page-btn">&gt;</button>
-          </div>
-        </>
+            ))}
+            
+            {posts.length === 0 && (
+              <tr>
+                <td colSpan="5" className="no-posts">
+                  게시글이 없습니다.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
       )}
+      <Footer />
     </div>
   );
 }

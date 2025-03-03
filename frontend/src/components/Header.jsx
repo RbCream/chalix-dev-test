@@ -2,18 +2,19 @@ import { useRef, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
 import '../styles/Header.css';
-import logo from '../assets/logo.png';
+import { LOGO } from '../assets/imageUrls';
 
 function Header() {
   const headerRef = useRef(null);
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
+  const [logoError, setLogoError] = useState(false);
   
   useEffect(() => {
     // 헤더 애니메이션
     gsap.from(headerRef.current, {
       y: -50,
-      opacity: 0,
+      // 
       duration: 1,
       ease: "power3.out"
     });
@@ -34,14 +35,29 @@ function Header() {
     };
   }, []);
   
+  // 이미지 로드 에러 핸들링
+  const handleImageError = () => {
+    setLogoError(true);
+    console.warn('로고 이미지를 로드하는데 실패했습니다.');
+  };
+  
   return (
     <header ref={headerRef} className={`header ${scrolled ? 'scrolled' : ''}`}>
       <div className="header-container">
         <div className="logo">
           <Link to="/">
-            <img src={logo} alt="Chalix Logo" />
+            {logoError ? (
+              <div className="logo-text">CHALIX</div>
+            ) : (
+              <img 
+                src={LOGO} 
+                alt="Chalix Logo" 
+                onError={handleImageError}
+              />
+            )}
           </Link>
         </div>
+        
         <nav className="nav">
           <ul>
             <li className="nav-item">ABOUT US</li>

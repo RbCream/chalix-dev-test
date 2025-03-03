@@ -35,6 +35,12 @@
   height: 35px;
 }
 
+.logo-text {
+  font-size: 28px;
+  font-weight: 700;
+  color: currentColor;
+}
+
 .nav ul {
   display: flex;
   list-style: none;

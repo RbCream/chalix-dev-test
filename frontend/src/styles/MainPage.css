@@ -50,17 +50,20 @@ body {
     transition: 1s;
 }
 
-.header-section .header-container.active {
+.header-section 
+.header-container.active {
     transform: translateY(0);
 }
 
-.header-section .header-left-logowrap {
+.header-section 
+.header-left-logowrap {
     width: 200px;
     height: 80%;
     overflow: hidden;
 }
 
-.header-section .header-logo-img {
+.header-section 
+.header-logo-img {
     height: 100%;
     object-fit: contain;
 }

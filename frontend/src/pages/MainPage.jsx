@@ -3,294 +3,147 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import '../styles/MainPage.css';
 import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 gsap.registerPlugin(ScrollTrigger);
 
 function MainPage() {
-  const heroRef = useRef(null);
-  const introRef = useRef(null);
-  const featuresRef = useRef(null);
-  const techRef = useRef(null);
-  const partnersRef = useRef(null);
-  const [imageErrors, setImageErrors] = useState({});
-  
-  // 이미지 로드 에러 핸들링
-  const handleImageError = (imageName) => {
-    setImageErrors(prev => ({
-      ...prev,
-      [imageName]: true
-    }));
-    console.warn(`이미지 로드 실패: ${imageName}`);
-  };
-  
-  useEffect(() => {
-    // 히어로 섹션 애니메이션
-    gsap.from(heroRef.current.querySelector('.hero-content'), {
-      y: 50,
-      duration: 1.5,
-      ease: "power3.out"
-    });
-    
-    // 인트로 섹션 애니메이션
-    gsap.from(introRef.current.querySelector('.section-title'), {
-      y: 30,
-      duration: 1,
-      scrollTrigger: {
-        trigger: introRef.current,
-        start: "top 80%",
-        toggleActions: "play none none reverse"
-      }
-    });
-    
-    gsap.from(introRef.current.querySelectorAll('.intro-item'), {
-      y: 50,
-      stagger: 0.2,
-      duration: 0.8,
-      scrollTrigger: {
-        trigger: introRef.current,
-        start: "top 60%",
-        toggleActions: "play none none reverse"
-      }
-    });
-    
-    // 특징 섹션 애니메이션
-    gsap.from(featuresRef.current.querySelector('.section-title'), {
-      y: 30,
-      duration: 1,
-      scrollTrigger: {
-        trigger: featuresRef.current,
-        start: "top 80%",
-        toggleActions: "play none none reverse"
-      }
-    });
-    
-    gsap.from(featuresRef.current.querySelectorAll('.feature-item'), {
-      y: 50,
-      stagger: 0.2,
-      duration: 0.8,
-      scrollTrigger: {
-        trigger: featuresRef.current,
-        start: "top 60%",
-        toggleActions: "play none none reverse"
-      }
-    });
-    
-    // 기술 섹션 애니메이션
-    gsap.from(techRef.current.querySelector('.section-title'), {
-      y: 30,
-      duration: 1,
-      scrollTrigger: {
-        trigger: techRef.current,
-        start: "top 80%",
-        toggleActions: "play none none reverse"
-      }
-    });
-    
-    gsap.from(techRef.current.querySelectorAll('.tech-item'), {
-      scale: 0.9,
-      stagger: 0.2,
-      duration: 0.8,
-      scrollTrigger: {
-        trigger: techRef.current,
-        start: "top 60%",
-        toggleActions: "play none none reverse"
-      }
-    });
-    
-    // 파트너 섹션 애니메이션
-    gsap.from(partnersRef.current.querySelector('.section-title'), {
-      y: 30,
-      duration: 1,
-      scrollTrigger: {
-        trigger: partnersRef.current,
-        start: "top 80%",
-        toggleActions: "play none none reverse"
-      }
-    });
-    
-    gsap.from(partnersRef.current.querySelectorAll('.partner-logo'), {
-      y: 20,
-      stagger: 0.1,
-      duration: 0.6,
-      scrollTrigger: {
-        trigger: partnersRef.current,
-        start: "top 70%",
-        toggleActions: "play none none reverse"
-      }
-    });
-    
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
-  }, []);
   
   return (
-    <main className="main-page">
-      <section 
-        ref={heroRef} 
-        className="hero" 
-        style={{ 
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(/assets/images/hero-bg.jpg)` 
-        }}
-      >
-        <div className="hero-content">
-          <h1>AI 혁신으로<br />더 나은 미래를 만듭니다</h1>
-          <p>더 빠르고 더 정확한 AI 솔루션</p>
-          <button className="hero-btn">자세히 보기</button>
+   // https://test.chalix.co.kr/ 와 동일한 프론트엔드 페이지 구현
+   // GASP 라이브러리를 사용하여 애니메이션 효과 추가
+   <main>
+    <Header />
+{/* #1 - 메인페이지 출력시 백그라운드 영상재생 & 타이핑 되듯 출력되어야함 + 커서없음 */}
+    <section className='mainbanner'>
+      <div className='mainbanner-mp4'>
+        <video autoPlay loop muted>
+          <source src='https://test.chalix.co.kr/images/main-video-section/mainvid.mp4' type='video/mp4' />
+        </video>
+        <div className='mainbanner-content'> 
+        지속 가능한 미래와 고객의 비즈니스 성공을
+        위한 혁신적인 환경 솔루션을 제공합니다
         </div>
-      </section>
-      
-      <section ref={introRef} className="intro-section">
-        <div className="container">
-          <h2 className="section-title">챌릭스 소개</h2>
-          <p className="section-desc">
-            챌릭스는 최첨단 인공지능 기술로 산업 혁신을 선도하는 기업입니다. 
-            우리는 복잡한 문제를 해결하고 비즈니스 가치를 창출하는 AI 솔루션을 개발합니다.
-          </p>
-          
-          <div className="intro-grid">
-            <div className="intro-item">
-              <div className="item-number">01</div>
-              <h3>미션</h3>
-              <p>AI 기술로 산업의 디지털 전환을 가속화하고 사회적 가치를 창출합니다.</p>
-            </div>
-            <div className="intro-item">
-              <div className="item-number">02</div>
-              <h3>비전</h3>
-              <p>혁신적인 AI 기술의 선두주자로 글로벌 시장을 선도합니다.</p>
-            </div>
-            <div className="intro-item">
-              <div className="item-number">03</div>
-              <h3>가치</h3>
-              <p>혁신, 협업, 신뢰를 핵심 가치로 우수한 AI 솔루션을 제공합니다.</p>
-            </div>
+      </div>
+    </section>
+{/* #2 - 스크롤내리면 카드가 좁혀지며 이미지가 2개에서 4개됨
+(좌우패딩 48) */}
+    <section className='Expertise'>
+      {/* #2-1 컨텐츠 타이틀 */}
+      <div className='exp-title'>
+        <div className='exp-maintitle'>
+        Our Expertise
+        </div>
+        <div className='exp-subtitle'>
+        깊이 있는 전문 지식으로 
+        지속 가능한 미래를 설계합니다
+        </div>
+      </div>
+
+      {/* #2-2 컨텐츠 영역 + 애니메이션션 */}
+      <div className='exp-container'>
+        <div className='exp-content1'>
+        <img src='../assets/mom-cards-news/scale1.jpg' alt='exp1' />
+          <div className='exp-content1-text'>
+          <h2>컨설팅부</h2>
+          <p>다양한 경험과 노하우를 바탕으로 기후변화 대응 최적전략 수립 및 탄소배출권 관리 및  국가와 기업의 경쟁령을 고취합니다</p>
           </div>
         </div>
-      </section>
-      
-      <section ref={featuresRef} className="features-section">
-        <div className="container">
-          <h2 className="section-title">우리의 강점</h2>
-          <div className="features-grid">
-            <div className="feature-item">
-              <div className="feature-icon">
-                <img 
-                  src="/assets/icons/icon-research.png" 
-                  alt="연구 중심"
-                  onError={() => handleImageError('iconResearch')}
-                  className={imageErrors.iconResearch ? 'hidden' : ''}
-                />
-                {imageErrors.iconResearch && <i className="icon-research"></i>}
-              </div>
-              <h3>연구 중심</h3>
-              <p>최신 AI 기술 연구와 개발에 집중하여 혁신적인 솔루션을 제공합니다.</p>
-            </div>
-            <div className="feature-item">
-              <div className="feature-icon">
-                <img 
-                  src="/assets/icons/icon-solution.png" 
-                  alt="맞춤형 솔루션"
-                  onError={() => handleImageError('iconSolution')}
-                  className={imageErrors.iconSolution ? 'hidden' : ''}
-                />
-                {imageErrors.iconSolution && <i className="icon-solution"></i>}
-              </div>
-              <h3>맞춤형 솔루션</h3>
-              <p>각 산업과 기업의 요구사항에 맞는 최적화된 AI 솔루션을 설계합니다.</p>
-            </div>
-            <div className="feature-item">
-              <div className="feature-icon">
-                <img 
-                  src="/assets/icons/icon-expert.png" 
-                  alt="전문가 팀"
-                  onError={() => handleImageError('iconExpert')}
-                  className={imageErrors.iconExpert ? 'hidden' : ''}
-                />
-                {imageErrors.iconExpert && <i className="icon-expert"></i>}
-              </div>
-              <h3>전문가 팀</h3>
-              <p>AI, 데이터 사이언스, 소프트웨어 엔지니어링 전문가로 구성된 팀입니다.</p>
-            </div>
-            <div className="feature-item">
-              <div className="feature-icon">
-                <img 
-                  src="/assets/icons/icon-scale.png" 
-                  alt="확장성"
-                  onError={() => handleImageError('iconScale')}
-                  className={imageErrors.iconScale ? 'hidden' : ''}
-                />
-                {imageErrors.iconScale && <i className="icon-scale"></i>}
-              </div>
-              <h3>확장성</h3>
-              <p>대규모 데이터와 복잡한 환경에서도 안정적으로 작동하는 시스템을 구축합니다.</p>
-            </div>
+
+        <div className='exp-content2'>
+        <img src='../assets/mom-cards-news/scale2.jpg' alt='exp2' />
+          <div className='exp-content2-text'>
+          <h2>글로벌연구센터</h2>
+          <p>기후변화 대응 및 ESG 경영 선도를 위해 국제개발협력, 정책연구, 신재생에너지 및 탄소감축 사업 등 다양한 현지 맞춤형 솔루션을 제공합니다</p>
           </div>
         </div>
-      </section>
-      
-      <section ref={techRef} className="tech-section">
-        <div className="container">
-          <h2 className="section-title">핵심 기술</h2>
-          <div className="tech-grid">
-            <div className="tech-item">
-              <img 
-                src="/assets/images/tech-image-1.jpg" 
-                alt="자연어 처리"
-                onError={() => handleImageError('tech1')}
-                className={imageErrors.tech1 ? 'hidden' : ''}
-              />
-              {imageErrors.tech1 && <img src="/assets/images/fallback.jpg" alt="자연어 처리" />}
-              <div className="tech-content">
-                <h3>자연어 처리</h3>
-                <p>텍스트 분석, 감성 분석, 자동 번역 등 언어를 이해하고 처리하는 기술</p>
-              </div>
-            </div>
-            <div className="tech-item">
-              <img 
-                src="/assets/images/tech-image-2.jpg" 
-                alt="컴퓨터 비전"
-                onError={() => handleImageError('tech2')}
-                className={imageErrors.tech2 ? 'hidden' : ''}
-              />
-              {imageErrors.tech2 && <img src="/assets/images/fallback.jpg" alt="컴퓨터 비전" />}
-              <div className="tech-content">
-                <h3>컴퓨터 비전</h3>
-                <p>이미지 인식, 객체 탐지, 얼굴 인식 등 시각 데이터를 분석하는 기술</p>
-              </div>
-            </div>
-            <div className="tech-item">
-              <img 
-                src="/assets/images/tech-image-3.jpg" 
-                alt="예측 분석"
-                onError={() => handleImageError('tech3')}
-                className={imageErrors.tech3 ? 'hidden' : ''}
-              />
-              {imageErrors.tech3 && <img src="/assets/images/fallback.jpg" alt="예측 분석" />}
-              <div className="tech-content">
-                <h3>예측 분석</h3>
-                <p>머신러닝 알고리즘을 활용한 데이터 기반 예측 모델링 및 분석 기술</p>
-              </div>
-            </div>
+
+        <div className='exp-content3'>
+        <img src='../assets/mom-cards-news/scale3.jpg' alt='exp3' />
+          <div className='exp-content3-text'>
+          <h2>정책연구부</h2>
+          <p>국가, 지방자치단체, 사업장 등이 환경분야 및 기후변화에 선도적으로 대응할 수 있도록 정책 개발 및 대안 마련합니다</p>
           </div>
         </div>
-      </section>
-      
-      <section ref={partnersRef} className="partners-section">
-        <div className="container">
-          <h2 className="section-title">주요 파트너</h2>
-          <p className="section-desc">다양한 산업 분야의 파트너들과 함께 혁신적인 솔루션을 만들어갑니다.</p>
-          <div className="partners-grid">
-            <div className="partner-logo">Partner 1</div>
-            <div className="partner-logo">Partner 2</div>
-            <div className="partner-logo">Partner 3</div>
-            <div className="partner-logo">Partner 4</div>
-            <div className="partner-logo">Partner 5</div>
-            <div className="partner-logo">Partner 6</div>
+
+        <div className='exp-content4'>
+        <img src='../assets/mom-cards-news/scale4.jpg' alt='exp4' />
+          <div className='exp-content4-text'>
+          <h2>기술개발부</h2>
+          <p>세균 및 바이러스 제거, 지속적인 효과, 환경 친화적인 항균ᆞ항바이러스 나노물질의 개발로  새로운 제품과 서비스를 제공합니다</p>
           </div>
         </div>
-      </section>
-      <Footer />
-    </main>
+      
+      </div>
+    </section>
+    
+{/* #3 - GRID 5x5 컨텐츠 배치 + 마우스 스크롤시 글 나타남 &
+마우스 호버 시 아이콘나타남 (좌우패딩 48) */}
+    <section className='grid'>
+      <div className='grid-content1'>
+      Latest News
+      순환경제사회법 시행령 일부개정령안 입법예고
+      </div>
+      
+      <div className='grid-content2'>
+        <img src='../assets/plaid-pattern-section/2-1.png' alt='section2' />
+      신뢰와 정확성을 바탕으로하는 카이트 엔지니어링
+      </div>
+      
+      <div className='grid-content3'>
+      <img src='../assets/plaid-pattern-section/2-2.png' alt='section3' />
+      신뢰와 정확성을 바탕으로하는 카이트 엔지니어링
+      </div>
+      
+      <div className='grid-content4'>
+      <img src='../assets/plaid-pattern-section/2-3.png' alt='section4' />
+      고객 맞춤형 환경 솔루션 제공
+      </div>
+      
+      <div className='grid-content5'>
+      <img src='../assets/plaid-pattern-section/2-4.png' alt='section5' />
+      신뢰와 정확성을 바탕으로하는 카이트 엔지니어링
+      </div>
+      
+      <div className='grid-content6'>
+      <img src='../assets/plaid-pattern-section/2-5.png' alt='section6' />
+      고객 맞춤형 환경 솔루션 제공
+      </div>
+      
+      <div className='grid-content7'>
+      바로가기
+      <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg>
+      </div>
+    </section>
+
+{/* #4 - 까만화면에 글자에서 스크롤 진행하면 이미지 5개 올라가다가 
+가운데 이미지는 중앙에서 멈춰서 스크롤 내릴수록 확대되어 꽉차게됨 + 다른이미지는 위로 올라감 >  */}
+    <section className='extension-img'>
+
+      {/* #4-1 올라오는 이미지들과 배경 컨테이너 / 3번이미지가 확대되어 배경으로 사용됨됨 */}
+      <div className='ext-container'>
+        <div className='ext-img1'><img src='../assets/slide-image-section/5.png' alt='ext1' /></div>
+        <div className='ext-img2'><img src='../assets/slide-image-section/4.png' alt='ext2' /></div>
+        <div className='ext-img3'><img src='../assets/slide-image-section/1.png' alt='ext3' /></div>
+        <div className='ext img4'><img src='../assets/slide-image-section/3.png' alt='ext4' /></div>
+        <div className='ext img5'><img src='../assets/slide-image-section/2.png' alt='ext5' /></div>
+      </div>
+      
+      {/* #4-2 이미지 배경 내부 텍스트, 내부 위치고정정 */}
+      <div className='ext-contents'>
+        Environmental consultancy firm
+        offering high-value advisory services
+        <div className='ext-button'>
+          사업실적
+          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+          <path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg>
+        </div>
+      </div> 
+    </section>
+
+    <Footer/>
+  
+  </main>
   );
 }
 

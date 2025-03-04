@@ -33,7 +33,7 @@ function MainPage() {
     gsap.to(expertiseRef.current, {
       scrollTrigger: {
         trigger: expertiseRef.current,
-        start: 'top center',
+        start: 'top 50%',
         end: 'bottom center',
         scrub: true,
       },
@@ -48,7 +48,7 @@ function MainPage() {
       gsap.to(ref.querySelector('.content-text'), {
         scrollTrigger: {
           trigger: ref,
-          start: 'top bottom',
+          start: 'top 40%', 
           end: 'top center',
           scrub: true,
           onEnter: () => ref.classList.add('scrolled'),
@@ -59,6 +59,18 @@ function MainPage() {
         duration: 1,
         ease: 'power2.inOut',
       });
+    });
+
+    // Expertise content animation
+    gsap.to('.exp-content', {
+      scrollTrigger: {
+        trigger: '.Expertise',
+        start: 'top 100%',
+        end: 'bottom 100%',
+        scrub: true,
+      },
+      width: '447px',
+      ease: 'power2.inOut',
     });
   }, []);
 
@@ -84,42 +96,42 @@ function MainPage() {
         Our Expertise
         </div>
         <div className='exp-subtitle'>
-        깊이 있는 전문 지식으로 
-        지속 가능한 미래를 설계합니다
+        <h1>깊이 있는 전문 지식으로<br/>
+        지속 가능한 미래를 설계합니다</h1>
         </div>
       </div>
 
-      {/* #2-2 컨텐츠 영역 + 애니메이션션 */}
+      {/* #2-2 컨텐츠 영역 + 애니메이션 */}
       <div className='exp-container'>
-        <div className='exp-content1'>
-        <img src='src/assets/mom-cards-news/scale1.jpg' alt='exp1' />
-          <div className='exp-content1-text'>
-          <h2>컨설팅부</h2>
-          <p>다양한 경험과 노하우를 바탕으로 기후변화 대응 최적전략 수립 및 탄소배출권 관리 및  국가와 기업의 경쟁령을 고취합니다</p>
+        <div className='exp-content exp-content1'>
+          <img src='src/assets/mom-cards-news/scale1.jpg' alt='exp1' />
+          <div className='exp-content-text'>
+            <h2>컨설팅부</h2>
+            <p>다양한 경험과 노하우를 바탕으로 기후변화 대응 최적전략 수립 및 탄소배출권 관리 및  국가와 기업의 경쟁령을 고취합니다</p>
           </div>
         </div>
 
-        <div className='exp-content2'>
-        <img src='src/assets/mom-cards-news/scale2.jpg' alt='exp2' />
-          <div className='exp-content2-text'>
-          <h2>글로벌연구센터</h2>
-          <p>기후변화 대응 및 ESG 경영 선도를 위해 국제개발협력, 정책연구, 신재생에너지 및 탄소감축 사업 등 다양한 현지 맞춤형 솔루션을 제공합니다</p>
+        <div className='exp-content exp-content2'>
+          <img src='src/assets/mom-cards-news/scale2.jpg' alt='exp2' />
+          <div className='exp-content-text'>
+            <h2>글로벌연구센터</h2>
+            <p>기후변화 대응 및 ESG 경영 선도를 위해 국제개발협력, 정책연구, 신재생에너지 및 탄소감축 사업 등 다양한 현지 맞춤형 솔루션을 제공합니다</p>
           </div>
         </div>
 
-        <div className='exp-content3'>
-        <img src='src/assets/mom-cards-news/scale3.jpg' alt='exp3' />
-          <div className='exp-content3-text'>
-          <h2>정책연구부</h2>
-          <p>국가, 지방자치단체, 사업장 등이 환경분야 및 기후변화에 선도적으로 대응할 수 있도록 정책 개발 및 대안 마련합니다</p>
+        <div className='exp-content exp-content3'>
+          <img src='src/assets/mom-cards-news/scale3.jpg' alt='exp3' />
+          <div className='exp-content-text'>
+            <h2>정책연구부</h2>
+            <p>국가, 지방자치단체, 사업장 등이 환경분야 및 기후변화에 선도적으로 대응할 수 있도록 정책 개발 및 대안 마련합니다</p>
           </div>
         </div>
 
-        <div className='exp-content4'>
-        <img src='src/assets/mom-cards-news/scale4.jpg' alt='exp4' />
-          <div className='exp-content4-text'>
-          <h2>기술개발부</h2>
-          <p>세균 및 바이러스 제거, 지속적인 효과, 환경 친화적인 항균ᆞ항바이러스 나노물질의 개발로  새로운 제품과 서비스를 제공합니다</p>
+        <div className='exp-content exp-content4'>
+          <img src='src/assets/mom-cards-news/scale4.jpg' alt='exp4' />
+          <div className='exp-content-text'>
+            <h2>기술개발부</h2>
+            <p>세균 및 바이러스 제거, 지속적인 효과, 환경 친화적인 항균ᆞ항바이러스 나노물질의 개발로  새로운 제품과 서비스를 제공합니다</p>
           </div>
         </div>
       
@@ -165,7 +177,7 @@ function MainPage() {
 가운데 이미지는 중앙에서 멈춰서 스크롤 내릴수록 확대되어 꽉차게됨 + 다른이미지는 위로 올라감 >  */}
     <section className='extension-img'>
 
-      {/* #4-1 올라오는 이미지들과 배경 컨테이너 / 3번이미지가 확대되어 배경으로 사용됨됨 */}
+      {/* #4-1 올라오는 이미지들과 배경 컨테이너 / 3번이미지가 확대되어 배경으로 사용되는 애니메이션 */}
       <div className='ext-container'>
         <div className='ext-img1'><img src='src/assets/slide-image-section/5.png' alt='ext1' /></div>
         <div className='ext-img2'><img src='src/assets/slide-image-section/4.png' alt='ext2' /></div>

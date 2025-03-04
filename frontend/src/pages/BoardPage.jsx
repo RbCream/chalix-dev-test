@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import process from 'process';
 import api from '../config/api';
 import '../styles/BoardPage.css';
 import Footer from '../components/Footer';
@@ -26,7 +27,6 @@ function BoardPage() {
   
   useEffect(() => {
     if (!loading && posts.length > 0 && tableRef.current) {
-      // 테이블 행 애니메이션
       const rows = tableRef.current.querySelectorAll('tbody tr');
       gsap.from(rows, {
         y: 20,
@@ -40,7 +40,7 @@ function BoardPage() {
   const fetchPosts = async () => {
     try {
       const response = await api.get('/board/presentation');
-      setPosts(response.data.slice(0, 8)); // 글 목록 8개만 표시
+      setPosts(response.data.slice(0, 8)); 
       setLoading(false);
     } catch (err) {
       console.error('Error fetching posts:', err);
@@ -51,56 +51,45 @@ function BoardPage() {
   
   return (
     <div ref={pageRef} className="board-page">
-      <div className="board-header">
-        <div className="header-container">
-          <div className="header-left-logowrap">
-            <img src="/assets/logo.png" alt="Logo" className="header-logo-img" />
-          </div>
-          <div className="header-right-navwrap">
-            <div className="header-nav-item"><a href="/">Home</a></div>
-            <div className="header-nav-item"><a href="/about">About</a></div>
-            <div className="header-nav-item contact"><a href="/contact">Contact</a></div>
-          </div>
-        </div>
-      </div>
-      
+
       {loading ? (
         <div className="loading">Loading...</div>
       ) : error ? (
         <div className="error">{error}</div>
       ) : (
-        <table ref={tableRef} className="board-table">
-          <thead>
-            <tr>
-              <th>번호</th>
-              <th>학술대회명</th>
-              <th>논문명</th>
-              <th>날짜</th>
-              <th>비고</th>
-            </tr>
-          </thead>
-          <tbody>
-            {posts.map(post => (
-              <tr key={post.id} className="post-row">
-                <td>{post.id}</td>
-                <td className="post-title">{post.conference_name}</td>
-                <td>{post.paper_title}</td>
-                <td>{new Date(post.date).toLocaleDateString()}</td>
-                <td>{post.note}</td>
-              </tr>
-            ))}
-            
-            {posts.length === 0 && (
+        <div className="board-content">
+          <table ref={tableRef} className="board-table">
+            <thead>
               <tr>
-                <td colSpan="5" className="no-posts">
-                  게시글이 없습니다.
-                </td>
+                <th>번호</th>
+                <th>학술대회명</th>
+                <th>논문명</th>
+                <th>날짜</th>
+                <th>비고</th>
               </tr>
-            )}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {posts.map(post => (
+                <tr key={post.id} className="post-row">
+                  <td>{post.id}</td>
+                  <td className="post-title">{post.conference_name}</td>
+                  <td>{post.paper_title}</td>
+                  <td>{new Date(post.date).toLocaleDateString()}</td>
+                  <td>{post.note}</td>
+                </tr>
+              ))}
+              
+              {posts.length === 0 && (
+                <tr>
+                  <td colSpan="5" className="no-posts">
+                    게시글이 없습니다.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
       )}
-      <Footer />
     </div>
   );
 }

@@ -3,24 +3,24 @@
   top: 0;
   left: 0;
   width: 100%;
-  padding: 20px 0;
+  padding: 22.5px 0; /* 높이가 스크롤 시 달라지지 않도록 고정 */
   background-color: transparent;
   color: white;
-  /* z-index: 1000; */
   transition: all 0.3s ease;
+  font-size: 1.3em; /* 폰트 크기를 1.3배로 조정 */
+  z-index: 10; /* 추가: 드롭다운이 다른 컨텐츠 위에 표시되도록 z-index 설정 */
 }
 
-.header.scrolled {
+.header.scrolled,
+.header:hover {
   background-color: white;
   color: #333;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 15px 0;
 }
 
 .header-container {
-  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 10px;
   justify-content: space-between;
   align-items: center;
   position: relative;
@@ -28,35 +28,49 @@
 }
 
 .logo img {
-  width: 117px;
-  height: 76px;
+  width: 167px;
+  height: 66px;
+  margin-left : 40px;
   transition: height 0.3s ease;
 }
 
 .header.scrolled .logo img {
-  height: 35px;
-}
+  width: 167px;
+  height: 66px;
+  }
+
 .nav {
   display: flex;
   align-items: center;
   width: 80%;
-  justify-self: space-between;
+  justify-content: space-between;
 }
 
 .nav ul {
   display: flex;
   list-style: none;
   gap: 40px;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .nav-item {
   font-size: 16px;
   font-weight: 500;
-  width:25vw;
   text-align: center;
   cursor: pointer;
   position: relative;
   transition: color 0.3s;
+  flex: 1;
+}
+
+.nav-item .contact {
+  display: inline-block;
+  padding: 5px 10px;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  width: auto;
 }
 
 .nav-item.active,
@@ -72,27 +86,32 @@
   display: none;
   position: absolute;
   top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  width: 100%;
   background-color: white;
-  min-width: 160px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  z-index: 1;
-  padding: 10px 0;
+  z-index: 11; 
+  padding: 20px 0;
   border-radius: 4px;
   color: #333;
   margin-top: 15px;
+  border-top: 1px solid #ddd; /* 헤더 높이에서 경계선 추가 */
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease;
 }
 
-.dropdown-content::before {
-  content: '';
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent transparent white transparent;
+.dropdown-content.visible {
+  display: block;
+  max-height: 300px;
+  padding-left:19%;
+  border-top: 1px solid #ddd;
+}
+
+.dropdown-content hr {
+  margin: 0;
+  border: none;
+  border-top: 1px solid #ddd;
 }
 
 .dropdown-content a,
@@ -110,6 +129,88 @@
   color: #3498db;
 }
 
-.dropdown:hover .dropdown-content {
+.nav-item:hover .dropdown-content {
   display: block;
+}
+
+.header-container:hover .dropdown-content {
+  display: block;
+  max-height: 300px; /* 드롭다운 최대 높이 설정 */
+  transition: max-height 0.3s ease;
+}
+
+.nav-item:hover::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 0; /* 드롭다운 높이만큼 설정 제거 */
+  background-color: transparent; /* 흰 배경 제거 */
+  z-index: 10;
+}
+
+.drpdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.header.expanded {
+  height: 25vh; /* 화면의 1/4 정도로 설정 */
+  background-color: white;
+  color: #333;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-item .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.nav-item.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown-section {
+  display: inline-block;
+  width: 25%; /* 상위 메뉴와 동일한 넓이로 설정 */
+  vertical-align: top;
+  padding: 0 20px;
+}
+
+.dropdown-section h4 {
+  margin: 0 0 10px;
+  font-size: 14px; /* 폰트 크기 줄임 */
+  font-weight: bold;
+}
+
+.dropdown-section a {
+  display: block;
+  padding: 5px 0;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px; /* 폰트 크기 줄임 */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.dropdown-section a:hover {
+  background-color: #f8f9fa;
+  color: #3498db;
 }

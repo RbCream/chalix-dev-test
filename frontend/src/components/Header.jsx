@@ -13,7 +13,7 @@ function Header() {
   useEffect(() => {
     // 헤더 애니메이션
     gsap.from(headerRef.current, {
-      y: -50,
+      y: 0,
       // 
       duration: 1,
       ease: "power3.out"
@@ -47,7 +47,9 @@ function Header() {
         <div className="logo">
           <Link to="/">
             {logoError ? (
-              <div className="logo-text">CHALIX</div>
+              <div className="logo-text">
+                 <img src="src/assets/header-section/logo2.png" alt="Logo" className="header-logo" />
+                </div>
             ) : (
               <img 
                 src={LOGO} 
@@ -60,7 +62,8 @@ function Header() {
         
         <nav className="nav">
           <ul>
-            <li className="nav-item">ABOUT US</li>
+            <li className="nav-item">WHO WE ARE</li>
+            <li className="nav-item">WHAT WE CAN</li>
             <li className={`nav-item dropdown ${location.pathname.includes('/board') ? 'active' : ''}`}>
               <span>WHAT WE DO</span>
               <div className="dropdown-content">
@@ -69,7 +72,7 @@ function Header() {
                 <span>소프트웨어</span>
               </div>
             </li>
-            <li className="nav-item">CONTACT</li>
+            <li className="nav-item" style={{ border: '1px solid #FFFFFF' }}>CONTACT</li>
           </ul>
         </nav>
       </div>

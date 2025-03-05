@@ -41,15 +41,18 @@
 
 /* #2 Expertise Section */
 .Expertise {
-  padding: 0 48px;
-  margin: 2% 0;
-  position: relative;
+  overflow: hidden;
+  margin-left:24px;
+  height: 100vh;
+  position: relative; 
+  top: 15%; 
 }
 
 .exp-container {
+  position: relative;
   display: flex;
-  flex-wrap: nowrap;
   gap: 20px;
+  top:100;
 }
 .exp-title {
   font-size: 16px;
@@ -88,6 +91,7 @@
 
 /* #3 Grid Section */
 .grid {
+  margin : 0 24px;
   padding: 40px;
   background-color: #fff;
   display: grid;
@@ -95,7 +99,6 @@
   grid-template-rows: repeat(5, 1fr);
   gap: 10px;
   color: #fff;
-  max-width: 1920px;
 }
 
 .grid img {
@@ -194,7 +197,6 @@
 
 .extension-img {
   position: relative;
-  width: 100%;
   height: 300vh;
   z-index: 1;
 }
@@ -204,7 +206,6 @@
   width: 100%;
   height: 300vh;
   z-index: 2;
-  background-color: 32,32,32 0.8;
 }
 
 .ext-content{
@@ -220,6 +221,7 @@
   color: #fff;
   z-index: 2;
 }
+
 .ext-title{
   position: sticky;
   top: 0;
@@ -233,12 +235,13 @@
   color: #fff;
   z-index: 2;
 }
-.ext-title-h1{
+.ext-title-text{
   position: relative;
   font-size: 68px;
   text-align: center;
   z-index: 50;
 }
+
 .ext-button{
   padding: 20px 0 0;
   z-index: 99;
@@ -259,6 +262,17 @@
   gap: 20px;
 }
 
+.ext-slideimg{
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  z-index: 2;
+
+}
 .ext-img1,
 .ext-img2,
 .ext-img3,
@@ -271,6 +285,7 @@
 .ext-img1{
   width: 400px;
   height:400px;
+  data-speed: 0.5;
 }
 .ext-img2{
   width: 350px;
@@ -279,7 +294,7 @@
 .ext-img3{
   width: 300px;
   height:300px;
-  left:50%;
+  
 }
 .ext-img4{
   width: 300px;
@@ -288,7 +303,6 @@
 .ext-img5{
   width: 400px;
   height:300px;
-  left:100%;
 }
 
 .ext-img1 img{
@@ -315,4 +329,8 @@
   width: 100%;
   height:100%;
   object-fit: cover;
+}
+
+body {
+  overflow-x: hidden;
 }

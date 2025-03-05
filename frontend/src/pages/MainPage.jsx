@@ -29,18 +29,18 @@ function MainPage() {
       delay: 1,
     });
 
-    // Expertise 애니메이션
-    gsap.to(expertiseRef.current, {
+    // Expertise content animation
+    // 애니메이션은 Expertise 하단에 도착하면 시작하고 
+    // 애니메이션이 끝날때까지 스크롤이 내려가지 않게 합니다.
+    gsap.to('.exp-content', {
       scrollTrigger: {
         trigger: expertiseRef.current,
-        start: 'top 50%',
-        end: 'bottom center',
+        start: "top 200%",
+        end: "top top",
         scrub: true,
       },
-      duration: 1,
+      width: '447px',
       ease: 'power2.inOut',
-      width: '100%',
-      padding: '0 48px',
     });
 
     // Grid content animation
@@ -61,17 +61,25 @@ function MainPage() {
       });
     });
 
-    // Expertise content animation
-    gsap.to('.exp-content', {
-      scrollTrigger: {
-        trigger: '.Expertise',
-        start: 'top 100%',
-        end: 'bottom 100%',
-        scrub: true,
-      },
-      width: '447px',
-      ease: 'power2.inOut',
+    // Slide images animation with adjusted speeds
+    const speeds = [1, 1.5, 1.2, 1, 2];
+    gsap.utils.toArray('.ext-slideimg div').forEach((img, i) => {
+      gsap.fromTo(img, 
+        { y: '100%', left: `${i * 20}%` }, 
+        {
+          y: '0%',
+          scrollTrigger: {
+            trigger: img,
+            start: 'top bottom',
+            end: 'top top',
+            scrub: true,
+          },
+          ease: 'power2.inOut',
+          duration: speeds[i],
+        }
+      );
     });
+
   }, []);
 
   return (
@@ -87,7 +95,7 @@ function MainPage() {
           <div className='mainbanner-content' ref={textRef}></div>
         </div>
       </section>
-      
+
 {/* #2 - 스크롤내리면 카드가 좁혀지며 이미지가 2개에서 4개됨
 (좌우패딩 48) */}
     <section className='Expertise' ref={expertiseRef}>
@@ -169,7 +177,7 @@ function MainPage() {
       <div className='grid-content7'>
         바로가기
         <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-          <path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path>
+          <path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path>
         </svg>
       </div>
     </section>
@@ -181,27 +189,27 @@ function MainPage() {
   {/* #4-2 이미지 배경 내부 텍스트, 내부 위치고정정 */}
         <div className='ext-content'>
           <div className='ext-title'>
-            <h1 className='ext-title-h1'>Environmental consultancy firm<br/>
+            <h1 className='ext-title-text'>Environmental consultancy firm<br/>
             offering high-value advisory services</h1>
-          </div>
-          <div className='ext-button'>
+            <div className='ext-button'>
             <a className='ext-button-text'>사업실적
             <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-            <path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg>
+            <path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg>
             </a>
           </div> 
-
-          {/* #4-1 올라오는 이미지들과 배경 컨테이너 / 3번이미지가 확대되어 배경으로 사용되는 애니메이션 */}
-
-            <div className='ext-img1'><img src='src/assets/slide-image-section/5.png' alt='ext1' /></div>
-            <div className='ext-img2'><img src='src/assets/slide-image-section/4.png' alt='ext2' /></div>
-            <div className='ext-img3'><img src='src/assets/slide-image-section/1.png' alt='ext3' /></div>
-            <div className='ext-img4'><img src='src/assets/slide-image-section/3.png' alt='ext4' /></div>
-            <div className='ext-img5'><img src='src/assets/slide-image-section/2.png' alt='ext5' /></div>
           </div>
-      </div>
 
+          </div>
+          {/* #4-1 올라오는 이미지들과 배경 컨테이너 / 3번이미지가 확대되어 배경으로 사용되는 애니메이션 */}
+          <div className='ext-slideimg'>
+            <div className='ext-img1' data-speed="0.1"><img src='src/assets/slide-image-section/5.png' alt='ext1' /></div>
+            <div className='ext-img2' data-speed="4"><img src='src/assets/slide-image-section/4.png' alt='ext2' /></div>
+            <div className='ext-img3' data-speed="2"><img src='src/assets/slide-image-section/1.png' alt='ext3' /></div>
+            <div className='ext-img4' data-speed="0.1"><img src='src/assets/slide-image-section/3.png' alt='ext4' /></div>
+            <div className='ext-img5' data-speed="10"><img src='src/assets/slide-image-section/2.png' alt='ext5' /></div>
+          </div>
 
+          </div>
     </section>
 
   

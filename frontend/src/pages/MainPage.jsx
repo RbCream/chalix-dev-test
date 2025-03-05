@@ -87,6 +87,7 @@ function MainPage() {
           <div className='mainbanner-content' ref={textRef}></div>
         </div>
       </section>
+      
 {/* #2 - 스크롤내리면 카드가 좁혀지며 이미지가 2개에서 4개됨
 (좌우패딩 48) */}
     <section className='Expertise' ref={expertiseRef}>
@@ -175,27 +176,32 @@ function MainPage() {
 
 {/* #4 - 까만화면에 글자에서 스크롤 진행하면 이미지 5개 올라가다가 
 가운데 이미지는 중앙에서 멈춰서 스크롤 내릴수록 확대되어 꽉차게됨 + 다른이미지는 위로 올라감 >  */}
-    <section className='extension-img'>
+<section className='extension-img'>
+  <div className='ext-container' style={{ backgroundColor: 'rgb(32, 32, 32)' }}>
+  {/* #4-2 이미지 배경 내부 텍스트, 내부 위치고정정 */}
+        <div className='ext-content'>
+          <div className='ext-title'>
+            <h1 className='ext-title-h1'>Environmental consultancy firm<br/>
+            offering high-value advisory services</h1>
+          </div>
+          <div className='ext-button'>
+            <a className='ext-button-text'>사업실적
+            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+            <path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg>
+            </a>
+          </div> 
 
-      {/* #4-1 올라오는 이미지들과 배경 컨테이너 / 3번이미지가 확대되어 배경으로 사용되는 애니메이션 */}
-      <div className='ext-container'>
-        <div className='ext-img1'><img src='src/assets/slide-image-section/5.png' alt='ext1' /></div>
-        <div className='ext-img2'><img src='src/assets/slide-image-section/4.png' alt='ext2' /></div>
-        <div className='ext-img3'><img src='src/assets/slide-image-section/1.png' alt='ext3' /></div>
-        <div className='ext img4'><img src='src/assets/slide-image-section/3.png' alt='ext4' /></div>
-        <div className='ext img5'><img src='src/assets/slide-image-section/2.png' alt='ext5' /></div>
+          {/* #4-1 올라오는 이미지들과 배경 컨테이너 / 3번이미지가 확대되어 배경으로 사용되는 애니메이션 */}
+
+            <div className='ext-img1'><img src='src/assets/slide-image-section/5.png' alt='ext1' /></div>
+            <div className='ext-img2'><img src='src/assets/slide-image-section/4.png' alt='ext2' /></div>
+            <div className='ext-img3'><img src='src/assets/slide-image-section/1.png' alt='ext3' /></div>
+            <div className='ext-img4'><img src='src/assets/slide-image-section/3.png' alt='ext4' /></div>
+            <div className='ext-img5'><img src='src/assets/slide-image-section/2.png' alt='ext5' /></div>
+          </div>
       </div>
-      
-      {/* #4-2 이미지 배경 내부 텍스트, 내부 위치고정정 */}
-      <div className='ext-contents'>
-        Environmental consultancy firm
-        offering high-value advisory services
-        <div className='ext-button'>
-          사업실적
-          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-          <path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg>
-        </div>
-      </div> 
+
+
     </section>
 
   

@@ -1,4 +1,4 @@
-/* Main Banner Section */
+/* #1 Main Banner Section */
 .mainbanner-mp4 video {
   height: 100vh;
   object-fit: cover;
@@ -39,7 +39,54 @@
   50% { border-color: orange; }
 }
 
-/* Grid Section */
+/* #2 Expertise Section */
+.Expertise {
+  padding: 0 48px;
+  margin: 2% 0;
+  position: relative;
+}
+
+.exp-container {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 20px;
+}
+.exp-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 40px;
+}
+
+.exp-content {
+  position: relative;
+  width: 768px;
+  height: 608px;
+  background-size: cover;
+  padding: 36px;
+  color: white;
+  transition: width 0.5s ease;
+}
+
+.exp-content img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.exp-content-text {
+  position: absolute;
+  top: 36px;
+  left: 36px;
+  z-index: 1;
+  padding: 36px;
+}
+
+
+/* #3 Grid Section */
 .grid {
   padding: 40px;
   background-color: #fff;
@@ -114,8 +161,7 @@
   grid-area: 5 / 3 / 6 / 4;
   background-color: #E24723;
 }
-
-/* Scroll animation */
+ 
 .grid-content2 .content-text,
 .grid-content3 .content-text,
 .grid-content4 .content-text,
@@ -144,48 +190,129 @@
   opacity: 1;
 }
 
-/* Expertise Section */
-.Expertise {
-  padding: 0 48px;
-  margin: 2% 0;
+/* #4 extension-img Section */
+
+.extension-img {
   position: relative;
+  width: 100%;
+  height: 300vh;
+  z-index: 1;
 }
 
-.exp-container {
+.ext-container {
+  position: relative;
+  width: 100%;
+  height: 300vh;
+  z-index: 2;
+  background-color: 32,32,32 0.8;
+}
+
+.ext-content{
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
   display: flex;
-  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  color: #fff;
+  z-index: 2;
+}
+.ext-title{
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  color: #fff;
+  z-index: 2;
+}
+.ext-title-h1{
+  position: relative;
+  font-size: 68px;
+  text-align: center;
+  z-index: 50;
+}
+.ext-button{
+  padding: 20px 0 0;
+  z-index: 99;
+  box-sizing: border-box;
+}
+.ext-button-text{
+  width: fit-content;
+  padding: 14px 24px;
+  border-radius: 2rem;
+  border: 1px solid #fff;
+  cursor: pointer;
+  color: #fff;
+  transition: background-color .2sease, color .2sease;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
   gap: 20px;
 }
-.exp-title {
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 40px;
+
+.ext-img1,
+.ext-img2,
+.ext-img3,
+.ext-img4,
+.ext-img5 {
+  overflow: hidden;
+  filter: brightness(1);
 }
 
-.exp-content {
-  position: relative;
-  width: 768px;
-  height: 608px;
-  background-size: cover;
-  padding: 36px;
-  color: white;
-  transition: width 0.5s ease;
+.ext-img1{
+  width: 400px;
+  height:400px;
+}
+.ext-img2{
+  width: 350px;
+  height:250px;
+}
+.ext-img3{
+  width: 300px;
+  height:300px;
+  left:50%;
+}
+.ext-img4{
+  width: 300px;
+  height:400px;
+}
+.ext-img5{
+  width: 400px;
+  height:300px;
+  left:100%;
 }
 
-.exp-content img {
-  position: absolute;
-  top: 0;
-  left: 0;
+.ext-img1 img{
   width: 100%;
-  height: 100%;
+  height:100%;
   object-fit: cover;
-  z-index: -1;
 }
-
-.exp-content-text {
-  position: absolute;
-  top: 36px;
-  left: 36px;
-  z-index: 1;
-  padding: 36px;
+.ext-img2 img{
+  width: 100%;
+  height:100%;
+  object-fit: cover;
+}
+.ext-img3 img{
+  width: 100%;
+  height:100%;
+  object-fit: cover;
+}
+.ext-img4 img{
+  width: 100%;
+  height:100%;
+  object-fit: cover;
+}
+.ext-img5 img{
+  width: 100%;
+  height:100%;
+  object-fit: cover;
 }

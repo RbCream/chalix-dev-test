@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
-import process from 'process';
 import api from '../config/api';
 import '../styles/BoardPage.css';
 import Footer from '../components/Footer';
